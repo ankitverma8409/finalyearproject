@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-pink-500 p-4">
+  <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+    <h1 class="text-3xl font-bold text-purple-700 mb-4">Diabetes Risk Result</h1>
+    <p class="text-lg font-semibold mb-2">Prediction: <span id="prediction" class="font-bold"></span></p>
+    <!-- <p class="text-md text-gray-700">Score: <span id="score"></span></p> -->
+    <!-- <p class="text-md text-gray-700">BMI: <span id="bmi"></span></p> -->
+    <p id="finalDiagnosis" class="mt-4 text-lg font-semibold text-gray-800"></p>
+    <a href="/template/prediction.html" class="mt-6 inline-block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-800 transition">Back to Form</a>
+  </div>
+
+  <script>
+    const prediction = localStorage.getItem("diabetesPrediction");
+    const score = localStorage.getItem("riskScore");
+    const bmi = localStorage.getItem("bmiValue");
+    const binaryDiagnosis = localStorage.getItem("binaryDiagnosis");
+
+    const predictionSpan = document.getElementById("prediction");
+    const scoreSpan = document.getElementById("score");
+    const bmiSpan = document.getElementById("bmi");
+
+    predictionSpan.innerText = prediction;
+    predictionSpan.className += prediction === "High Risk" ? " text-red-600" :
+                                 prediction === "Moderate Risk" ? " text-yellow-600" :
+                                 " text-green-600";
+
+    //scoreSpan.innerText = score;
+    //bmiSpan.innerText = bmi;
+    document.getElementById('finalDiagnosis').innerText = 
+    `According to our prediction logic, you are classified as: ${binaryDiagnosis}`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        /* Placeholder for Tailwind directives - ensure your CSS is processed */
+    </style>
+</head>
+<body class="container mx-auto py-8 text-center">
+    <h1
+        data-motion-initial='{"opacity": 0, "x": -150}'
+        data-motion-while-in-view='{"opacity": 1, "x": 0}'
+        data-motion-viewport='{"once": true}'
+        data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+        class="text-3xl font-bold mb-6 text-indigo-600 text-center border-b-2 p-2"
+    >
+        Diabetes Visualization
+    </h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">Age Plot</h2>
+            <img
+                src=""
+                alt="Glucose vs Blood Pressure"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('assets/plots/age_plot.png')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">BMI Plot</h2>
+            <img
+                src=""
+                alt="BMI vs Age"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('assets/plots/BMI_plot.png')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">
+                Blood Pressure Plot
+            </h2>
+            <img
+                src="g"
+                alt="Feature Importance"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">
+                Diabetes Pedigree Function Plot
+            </h2>
+            <img
+                src=""
+                alt="Residual Plot"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">
+                Glucose Plot
+            </h2>
+            <img
+                src=""
+                alt="Residual Plot"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">
+                Insulin Plot
+            </h2>
+            <img
+                src=""
+                alt="Residual Plot"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">
+                Pregnancies Plot
+            </h2>
+            <img
+                src=""
+                alt="Residual Plot"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+        <div
+            data-motion-initial='{"opacity": 0, "y": 150}'
+            data-motion-while-in-view='{"opacity": 1, "y": 0}'
+            data-motion-viewport='{"once": true}'
+            data-motion-transition='{"duration": 1, "type": "spring", "stiffness": 100, "delay": 0.5}'
+            class="bg-gray-100 p-4 rounded-lg shadow-md"
+        >
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">Skin Plot</h2>
+            <img
+                src=""
+                alt="Residual Plot"
+                class="mx-auto w-full h-64 object-cover rounded-lg cursor-pointer"
+                onclick="openModal('')"
+            />
+        </div>
+    </div>
+
+    <div id="imageModal" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50 hidden">
+        <div class="bg-white p-4 rounded-lg shadow-lg flex flex-col">
+            <div class="flex justify-end items-center">
+                <a id="downloadLink" href="#" download>
+                    <button class="p-2 bg-transparent text-red-500 hover:text-gray-800 focus:outline-none">
+                        <i class="fas fa-download w-7 h-6"></i>
+                    </button>
+                </a>
+                <button
+                    class="p-2 bg-transparent text-red-500 hover:text-gray-800 focus:outline-none"
+                    onclick="closeModal()"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-9 h-9">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <img id="modalImageDisplay" src="" alt="Visualization" class="mx-auto w-full h-96 object-cover rounded-lg" />
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('imageModal');
+        const modalImageDisplay = document.getElementById('modalImageDisplay');
+        const downloadLink = document.getElementById('downloadLink');
+
+        function openModal(imageSrc) {
+            modalImageDisplay.src = imageSrc;
+            downloadLink.href = imageSrc;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling behind the modal
+        }
+
+        function closeModal() {
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto'; // Enable scrolling again
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>

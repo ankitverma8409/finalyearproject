@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ Section</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-b from-indigo-100 to-white dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-white">
+
+  <section class="py-20">
+    <div class="container mx-auto px-4">
+      <div class="mb-12 text-center">
+        <span class="block mb-2 text-2xl font-semibold text-indigo-600 dark:text-indigo-400">FAQ</span>
+        <h2 class="text-4xl font-bold mb-4">Any Questions? Look Here</h2>
+        <p class="max-w-3xl mx-auto text-gray-500 dark:text-gray-300">Some of the frequently asked questions</p>
+      </div>
+
+      <div class="flex flex-wrap -mx-4">
+        <!-- Left Column -->
+        <div class="w-full lg:w-1/2 px-4">
+          <!-- Accordion Item -->
+          <div class="mb-8 bg-white dark:bg-gray-700 rounded-lg p-4 shadow-md">
+            <button class="w-full flex justify-between items-center p-4 text-left bg-indigo-100 dark:bg-gray-600 rounded-md" onclick="toggleFaq(this)">
+              <div class="flex items-center">
+                <div class="mr-4 h-8 w-8 flex items-center justify-center rounded-full bg-indigo-600 text-white">+</div>
+                <h4 class="text-lg font-semibold">What is this Project?</h4>
+              </div>
+            </button>
+            <div class="mt-4 pl-12 hidden text-gray-600 dark:text-gray-300">
+              Our Diabetes Prediction Website offers a user-friendly platform for individuals to assess their risk of developing diabetes. By inputting demographic and health data, users receive personalized predictions generated through advanced machine learning algorithms.
+            </div>
+          </div>
+
+          <div class="mb-8 bg-white dark:bg-gray-700 rounded-lg p-4 shadow-md">
+            <button class="w-full flex justify-between items-center p-4 text-left bg-indigo-100 dark:bg-gray-600 rounded-md" onclick="toggleFaq(this)">
+              <div class="flex items-center">
+                <div class="mr-4 h-8 w-8 flex items-center justify-center rounded-full bg-indigo-600 text-white">+</div>
+                <h4 class="text-lg font-semibold">What is BMI (Body Mass Index)?</h4>
+              </div>
+            </button>
+            <div class="mt-4 pl-12 hidden text-gray-600 dark:text-gray-300">
+              Body mass index (BMI) is a person's weight in kilograms divided by the square of height in meters.
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="w-full lg:w-1/2 px-4">
+          <div class="mb-8 bg-white dark:bg-gray-700 rounded-lg p-4 shadow-md">
+            <button class="w-full flex justify-between items-center p-4 text-left bg-indigo-100 dark:bg-gray-600 rounded-md" onclick="toggleFaq(this)">
+              <div class="flex items-center">
+                <div class="mr-4 h-8 w-8 flex items-center justify-center rounded-full bg-indigo-600 text-white">+</div>
+                <h4 class="text-lg font-semibold">What is DPF (Diabetes Pedigree Function)?</h4>
+              </div>
+            </button>
+            <div class="mt-4 pl-12 hidden text-gray-600 dark:text-gray-300">
+              DPF is a feature used to assess genetic predisposition to diabetes based on family history.
+            </div>
+          </div>
+
+          <div class="mb-8 bg-white dark:bg-gray-700 rounded-lg p-4 shadow-md">
+            <button class="w-full flex justify-between items-center p-4 text-left bg-indigo-100 dark:bg-gray-600 rounded-md" onclick="toggleFaq(this)">
+              <div class="flex items-center">
+                <div class="mr-4 h-8 w-8 flex items-center justify-center rounded-full bg-indigo-600 text-white">+</div>
+                <h4 class="text-lg font-semibold">What is Skin Thickness Parameter?</h4>
+              </div>
+            </button>
+            <div class="mt-4 pl-12 hidden text-gray-600 dark:text-gray-300">
+              Refers to the triceps skinfold thickness measurement, used to estimate subcutaneous fat.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleFaq(button) {
+      const content = button.nextElementSibling;
+      content.classList.toggle("hidden");
+    }
+  </script>
+</body>
+</html>

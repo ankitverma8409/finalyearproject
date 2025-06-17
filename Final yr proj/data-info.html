@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Data Information</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f3f4f6;
+    }
+    h1 {
+      text-align: center;
+      color: #6b21a8;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: auto;
+      max-width: 95%;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      text-align: left;
+    }
+    th {
+      background-color: #f3e8ff;
+      color: #6b21a8;
+      position: sticky;
+      top: 0;
+      cursor: pointer;
+    }
+    .container {
+      max-height: 420px;
+      overflow: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      background-color: #fff;
+    }
+    .loader {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Data Information</h1>
+  <div id="loader" class="loader">Loading...</div>
+  <div class="container" id="table-container" style="display: none;"></div>
+
+  <script>
+    let currentSortColumn = null;
+    let currentSortDirection = 'asc';
+    let data = [];
+
+    function renderTable(data) {
+      const tableContainer = document.getElementById('table-container');
+      let html = '<table><thead><tr>';
+      const headers = Object.keys(data[0]);
+
+      headers.forEach(header => {
+        html += `<th onclick="sortBy('${header}')">${header}`;
+        if (header === currentSortColumn) {
+          html += currentSortDirection === 'asc' ? ' ▲' : ' ▼';
+        } else {
+          html += ' ▼';
+        }
+        html += `</th>`;
+      });
+
+      html += '</tr></thead><tbody>';
+
+      data.forEach(row => {
+        html += '<tr>';
+        headers.forEach(header => {
+          html += `<td>${row[header]}</td>`;
+        });
+        html += '</tr>';
+      });
+
+      html += '</tbody></table>';
+      tableContainer.innerHTML = html;
+    }
+
+    function sortBy(column) {
+      if (currentSortColumn === column) {
+        currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+      } else {
+        currentSortColumn = column;
+        currentSortDirection = 'asc';
+      }
+
+      data.sort((a, b) => {
+        const aVal = a[column];
+        const bVal = b[column];
+        if (typeof aVal === 'number' && typeof bVal === 'number') {
+          return currentSortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+        }
+        return currentSortDirection === 'asc'
+          ? String(aVal).localeCompare(String(bVal))
+          : String(bVal).localeCompare(String(aVal));
+      });
+
+      renderTable(data);
+    }
+    fetch('diabetes.csv')
+      .then(response => response.text())
+      .then(csvText => {
+        Papa.parse(csvText, {
+          header: true,
+          dynamicTyping: true,
+          complete: function(results) {
+            data = results.data;
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('table-container').style.display = 'block';
+            renderTable(data);
+          }
+        });
+      })
+      .catch(error => {
+        document.getElementById('loader').textContent = 'Error loading data.';
+        console.error('Error fetching CSV:', error);
+      });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Diabetes Prediction Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<link rel="stylesheet" href="/template/prediction.css">
+<script src="/pickle/img/prediction.js"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-purple-500 to-pink-500 flex flex-col items-center justify-center pb-3">
+
+  <div id="messageBox" class="message-box"></div>
+
+  <div class="flex flex-col sm:flex-row items-center justify-center w-full px-4">
+    <div class="max-w-md bg-white rounded-lg shadow-lg p-8 sm:p-6 md:p-8 w-full sm:w-auto">
+      <h1 class="text-3xl font-bold mb-6 text-center text-purple-800">Enter all details</h1>
+      <form id="predictionForm">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <div class="mb-4">
+              <label for="Age" class="block text-gray-700 font-bold mb-2">Age</label>
+              <input type="number" name="Age" id="Age" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            <div class="mb-4">
+              <label for="Gender" class="block text-gray-700 font-bold mb-2">Gender</label>
+              <select id="Gender" name="Gender" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="mb-4">
+              <label for="Weight" class="block text-gray-700 font-bold mb-2" step="0.01">Weight (kg)</label>
+              <input type="number" name="Weight" id="Weight" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" min="0" value="0"/>
+            </div>
+            <div class="mb-4">
+              <label for="Glucose" class="block text-gray-700 font-bold mb-2">Glucose</label>
+              <input type="number" name="Glucose" id="Glucose" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            <!-- Triceps Thickness moved to the first column to align horizontally with Family History -->
+            <div class="mb-4">
+              <label for="TricepsThickness" class="block text-gray-700 font-bold mb-2">Triceps Thickness (mm)</label>
+              <input type="number" name="TricepsThickness" id="TricepsThickness" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+          </div>
+          <div>
+            <div class="mb-4">
+              <label for="BloodPressure" class="block text-gray-700 font-bold mb-2">Blood Pressure</label>
+              <input type="number" name="BloodPressure" id="BloodPressure" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            
+            <div class="mb-4">
+              <label for="Pregnancies" class="block text-gray-700 font-bold mb-2">Pregnancies</label>
+              <input type="number" name="Pregnancies" id="Pregnancies" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            
+            <div class="mb-4">
+              <label for="Height" class="block text-gray-700 font-bold mb-2" step="0.01">Height (cm)</label>
+              <input type="number" name="Height" id="Height" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            <div class="mb-4">
+              <label for="Insulin" class="block text-gray-700 font-bold mb-2">Insulin</label>
+              <input type="number" name="Insulin" id="Insulin" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required/>
+            </div>
+            <div class="mb-4">
+              <label for="BMI" class="block text-gray-700 font-bold mb-2">BMI</label>
+              <input type="number" name="BMI" id="BMI" step="0.01" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-100" readonly/>
+            </div>
+            
+            <div class="mb-4">
+              <label for="FamilyHistory" class="block text-gray-700 font-bold mb-2">Family History of Diabetes</label>
+              <select id="FamilyHistory" name="FamilyHistory" class="shadow border rounded w-full py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500" required>
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="flex justify-center mt-6">
+          <button type="submit" id="predictButton" class="py-2 px-4 rounded-md bg-purple-500 hover:bg-purple-700 text-white font-bold transition duration-300 ease-in-out transform hover:scale-105">
+            Predict
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <div class="w-full sm:w-auto mx-auto mt-8 sm:mt-0 sm:ml-8">
+      <div class="bg-white p-6 rounded-lg shadow-lg mx-4 sm:mx-0 w-full max-w-3xl">
+        <h2 class="text-2xl font-bold mb-4 text-purple-800 text-center">About the Parameters</h2>
+        <ul class="list-disc pl-5 space-y-2 text-gray-700">
+          <li><strong>Age:</strong> The age of the patient. Risk increases with age.</li>
+          <li><strong>Gender:</strong> The biological sex of the patient.</li>
+          <li><strong>Pregnancies:</strong> Number of pregnancies. This field will be set to 0 for males.</li>
+          <li><strong>Glucose:</strong> Plasma glucose concentration after test. High value = risk.</li>
+          <li><strong>Blood Pressure:</strong> Diastolic pressure. High pressure = higher diabetes risk.</li>
+          <li><strong>Weight (kg):</strong> The patient's weight in kilograms.</li>
+          <li><strong>Height (cm):</strong> The patient's height in centimeters.</li>
+          <li><strong>BMI:</strong> Body Mass Index. Calculated automatically from Weight and Height. Obesity is a major risk factor.</li>
+          <li><strong>Triceps Thickness (mm):</strong> Thickness of the skinfold over the triceps. Indicates body fat.</li>
+          <li><strong>Family History of Diabetes:</strong> Indicates genetic influence. Select 'Yes' (1) if there's a family history, 'No' (0) otherwise.</li>
+        </ul>
+      </div>
+
+      
+      <div id="predictionResult" class="hidden bg-white p-6 rounded-lg shadow-lg mx-4 sm:mx-0 w-full max-w-3xl mt-4 text-center border-2">
+        <h2 class="text-2xl font-bold mb-4 text-purple-800">Prediction Result</h2>
+        <p id="resultText" class="text-2xl font-bold mb-2"></p>
+        <p id="confidenceText" class="text-lg text-gray-600"></p>
+        
+      </div>
+    </div>
+  </div>
+  <script src="/pickle/img/pre.js"></script>
+ <script>
+    const genderSelect = document.getElementById('Gender');
+    const pregnanciesInput = document.getElementById('Pregnancies');
+    const weightInput = document.getElementById('Weight');
+    const heightInput = document.getElementById('Height');
+    const bmiInput = document.getElementById('BMI');
+    const predictionForm = document.getElementById('predictionForm');
+    const predictionResultDiv = document.getElementById('predictionResult');
+    const resultText = document.getElementById('resultText');
+    const confidenceText = document.getElementById('confidenceText');
+    const messageBox = document.getElementById('messageBox');
+    const predictButton = document.getElementById('predictButton');
+    const ageinput = document.getElementById("Age");
+    const tricepthicknessinput = document.getElementById("TricepsThickness");
+    const insulininput = document.getElementById("Insulin");
+
+
+    // Show messages
+    function showMessage(message, type) {
+        messageBox.textContent = message;
+        messageBox.className = `message-box ${type}`;
+        messageBox.style.display = 'block';
+
+        if (type !== 'loading') {
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 3000);
+        }
+    }
+
+    // BMI calculator
+    function calculateBMI() {
+        const weight = parseFloat(weightInput.value);
+        const heightCm = parseFloat(heightInput.value);
+
+        if (weight > 0 && heightCm > 0) {
+            const heightM = heightCm / 100;
+            const bmi = weight / (heightM * heightM);
+            bmiInput.value = bmi.toFixed(2);
+        } else {
+            bmiInput.value = '';
+        }
+    }
+
+    // Gender logic
+    genderSelect.addEventListener('change', function () {
+        if (this.value === 'Male') {
+            pregnanciesInput.value = 0;
+            pregnanciesInput.setAttribute('readonly', 'readonly');
+            pregnanciesInput.classList.add('bg-gray-100');
+        } else {
+            pregnanciesInput.removeAttribute('readonly');
+            pregnanciesInput.classList.remove('bg-gray-100');
+            if (pregnanciesInput.value === '0') {
+                pregnanciesInput.value = '';
+            }
+        }
+    });
+
+    weightInput.addEventListener('input', calculateBMI);
+    heightInput.addEventListener('input', calculateBMI);
+    calculateBMI(); // On load
+ 
+</script>
+<script src="/template/pre.js"></script>
+</body>
+</html>
